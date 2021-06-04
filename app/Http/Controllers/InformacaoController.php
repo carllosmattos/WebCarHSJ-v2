@@ -20,34 +20,31 @@ class InformacaoController extends Controller
     return view('informacao/tutorial_informacao');
   }
 
-/*
-          TUTORIAL
-*/
 
-  public function get_tutorial_access(Request $field)
-  {
-    return view('informacao/tutorial/access');
-  }
+  // TUTORIAL
 
   public function get_tutorial_cad(Request $field)
   {
-    return view('informacao/tutorial/cad');
+    return view('informacao/cad');
+  }
+
+  public function get_tutorial_access(Request $field)
+  {
+    return view('informacao/access');
   }
 
   public function get_tutorial_resetpassword(Request $field)
   {
-    return view('informacao/tutorial/resetpassword');
+    return view('informacao/resetpassword');
   }
 
   public function get_tutorial_vehiclerequest(Request $field)
   {
-    return view('informacao/tutorial/vehiclerequest');
+    return view('informacao/vehiclerequest');
   }
 
   public function get_tutorial_verifyrequest(Request $field)
   {
-    return view('informacao/tutorial/verifyrequest');
+    return view('informacao/verifyrequest');
   }
-
-
 }
