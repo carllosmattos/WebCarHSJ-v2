@@ -1,0 +1,28 @@
+@extends('layouts.application')
+
+@section('content')
+    <fieldset>
+        <h1 class="ls-title-intro ls-ico-question">Tutorial sobre o Sistema</h1>
+
+        <br>
+        <h3 class="ls-title-3">WEBCAR 2ª VERSÃO</h3>
+
+        <br><br>
+        <!-- RESETAR SENHA -->
+        <h5 class="ls-title-3">Resetar Senha:</h5>
+
+        <br>
+
+        <p style="font-size: 16px;">
+
+            Em caso de perda de senha, é possivel alterar em &nbsp;
+            @if (Route::has('password.request'))
+                <b><a href="{{ route('password.request') }}" style="color: black;">
+                        {{ __('Esqueceu sua senha?') }}
+                    </a></b>
+            @endif
+            &nbsp; digitar o endereço de email, e enviar a solicitação. <br> Após o processo, verificar a caixa de email e
+            redefinir a senha.
+        </p><br>
+        <img src="{{ URL::asset('gifs/resetpass.gif') }}" />
+        <!-- /RESETAR SENHA -->
