@@ -2,6 +2,7 @@
 
 @section('content')
     <fieldset>
+
         <h1 class="ls-title-intro ls-ico-question">Tutorial sobre o Sistema</h1>
 
         <br>
@@ -10,28 +11,52 @@
 
         <br><br>
 
-        <table class="table table-hover">
+        <table class="table">
             <tbody>
                 <tr>
 
-                    <th scope="row">
-                        <a href="{{route('cad.blade.php')}}" class="ls-title-3">Cadastro</a>
+                    <style>
+                        #thTutorial {
+                            text-align: center;
+                            border: none;
+                            padding: 16px 32px;
+                            text-align: center;
+                            font-size: 16px;
+                            margin: 4px 2px;
+                            border-radius: 4px;
+                            transition: 0.4s;
+                        }
+
+                        #thTutorial:hover {
+                            background-color: #1ab551;
+                            color: #fff;
+                        }
+
+                        a:hover {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+
+                    </style>
+
+                    <th scope="row" id="thTutorial">
+                        <a href="/informacao/cad" class="ls-title-3">Cadastro</a>
                     </th>
 
-                    <th scope="row">
-                        <a href="access.blade.php" class="ls-title-3">Primeiro Acesso</a>
+                    <th scope="row" id="thTutorial">
+                        <a href="/informacao/access" class="ls-title-3">Primeiro Acesso</a>
                     </th>
 
-                    <th scope="row">
-                        <a href="vehiclerequest.blade.php" class="ls-title-3">Solicitar Veículo</a>
+                    <th scope="row" id="thTutorial">
+                        <a href="/informacao/vehiclerequest" class="ls-title-3">Solicitar Veículo</a>
                     </th>
 
-                    <th scope="row">
-                        <a href="verifyrequest.blade.php" class="ls-title-3">Verificar Solicitação</a>
+                    <th scope="row" id="thTutorial">
+                        <a href="/informacao/verifyrequest" class="ls-title-3">Verificar Solicitação</a>
                     </th>
 
-                    <th scope="row">
-                        <a href="resetpassword.blade.php" class="ls-title-3">Resetar Senha</a>
+                    <th scope="row" id="thTutorial">
+                        <a href="/informacao/resetpassword" class="ls-title-3">Resetar Senha</a>
                     </th>
                 </tr>
         </table>

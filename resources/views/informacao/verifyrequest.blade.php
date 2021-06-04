@@ -13,14 +13,36 @@
 
         <br>
 
+        <style>
+            #verify {
+                color: #000;
+                text-decoration: none;
+            }
+
+            #verify:hover {
+                color: #000;
+                text-decoration: none;
+            }
+
+        </style>
+
         <p style="font-size: 16px;">
 
-            Ao acessar a <b><a href="/" style="color: black;">Pagina Inicial</a></b> é possivel ver as
+            Ao acessar a <b><a id="verify" href="/" style="color: black;">Pagina Inicial</a></b> é possivel ver as
             solicitações pendentes.<br>
-            Mas, ao acessar <b>Solicitações -> <a href="{{ route('solicitacoes') }}" style="color: black;">
+            Mas, ao acessar <b>Solicitações <i class="ls-ico-shaft-right"><a id="verify" href="{{ route('solicitacoes') }}" style="color: black;"></i>
                     Verificar Solicitações</a></b>, é possivel listar todas,
             tanto pendentes, quanto realizadas.
         </p><br>
         <img src="{{ URL::asset('gifs/verify.gif') }}" />
 
         <!-- /VERIFICAR SOLICITAÇÃO -->
+
+    </fieldset>
+
+    <br><br><br><br><br><br>
+
+    <footer class="footer">© 2020 - Todos os direitos reservados</footer>
+
+    <br>
+@stop

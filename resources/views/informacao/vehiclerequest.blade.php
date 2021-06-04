@@ -13,8 +13,22 @@
 
         <br>
 
+        <style>
+            #request {
+                color: #000;
+                text-decoration: none;
+            }
+
+            #request:hover {
+                color: #000;
+                text-decoration: none;
+            }
+
+        </style>
+
         <p style="font-size: 16px;">
-            Após o administrador liberar seu acesso, entre na aba <b>SOLICITAÇÕES</b>.
+            Após o administrador liberar seu acesso, entre na aba <b>SOLICITAÇÕES <i class="ls-ico-shaft-right"> <a
+                        id="request" href="/solicitacao-add"></i>Solicitar Veiculo</a></b>.
         </p><br>
         <img src="{{ URL::asset('gifs/solicity1.gif') }}" />
 
@@ -111,3 +125,12 @@
         <img src="{{ URL::asset('gifs/newsolicity2.gif') }}" />
 
         <!-- /SOLICITAÇÃO -->
+
+    </fieldset>
+
+    <br><br><br>
+
+    <footer class="footer">© 2020 - Todos os direitos reservados</footer>
+
+    <br>
+@stop

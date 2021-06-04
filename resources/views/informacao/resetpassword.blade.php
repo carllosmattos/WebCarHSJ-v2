@@ -13,11 +13,24 @@
 
         <br>
 
+        <style>
+            #reset {
+                color: #000;
+                text-decoration: none;
+            }
+
+            #reset:hover {
+                color: #000;
+                text-decoration: none;
+            }
+
+        </style>
+
         <p style="font-size: 16px;">
 
             Em caso de perda de senha, é possivel alterar em &nbsp;
             @if (Route::has('password.request'))
-                <b><a href="{{ route('password.request') }}" style="color: black;">
+                <b><a id="reset" href="{{ route('password.request') }}" style="color: black;">
                         {{ __('Esqueceu sua senha?') }}
                     </a></b>
             @endif
@@ -26,3 +39,12 @@
         </p><br>
         <img src="{{ URL::asset('gifs/resetpass.gif') }}" />
         <!-- /RESETAR SENHA -->
+
+    </fieldset>
+
+    <br><br><br><br><br><br>
+
+    <footer class="footer">© 2020 - Todos os direitos reservados</footer>
+
+    <br>
+@stop

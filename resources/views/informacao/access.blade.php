@@ -8,10 +8,25 @@
         <h3 class="ls-title-3">WEBCAR 2ª VERSÃO</h3>
 
         <br><br>
+
         <!-- PRIMEIRO ACESSO -->
+
         <h5 class="ls-title-3">Primeiro Acesso:</h5>
 
         <br>
+
+        <style>
+            #sobre {
+                color: #000;
+                text-decoration: none;
+            }
+
+            #sobre:hover {
+                color: #000;
+                text-decoration: none;
+            }
+
+        </style>
 
         <p style="font-size: 16px;">
             Ao criar o cadastro, <b>SOLICITE O ADMINISTRADOR</b> para que ele libero o acesso ao seu usuário.
@@ -21,7 +36,18 @@
         <br><br><br>
 
         <p style="font-size: 16px;">
-            Algumas informações sobre o WebCar se encontram na aba <b>SOBRE</b>, visite-a.
+            Algumas informações sobre o WebCar encontram-se na aba
+            <b><a id="sobre" href="/informacao/add">SOBRE</a></b> , visite-a.
         </p><br>
         <img src="{{ URL::asset('gifs/inform.gif') }}" />
+
         <!-- /PRIMEIRO ACESSO -->
+
+    </fieldset>
+
+    <br><br><br>
+
+    <footer class="footer">© 2020 - Todos os direitos reservados</footer>
+
+    <br>
+@stop
