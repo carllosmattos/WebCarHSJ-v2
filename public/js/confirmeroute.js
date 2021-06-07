@@ -48,12 +48,10 @@ function mapear(maproute) {
 }
 
 function resetInput() {
-    var acronym = document.getElementById("acronym");
     var publicPlace = document.getElementById("publicPlace");
     var numberPoint = document.getElementById("numberPoint");
     var neighborhood = document.getElementById("neighborhood");
     var city = document.getElementById("city");
-    acronym.value = '';
     publicPlace.value = '';
     numberPoint.value = '';
     neighborhood.value = '';
@@ -61,7 +59,6 @@ function resetInput() {
 }
 
 function setInputValueForm($inputForm, $inputValidForm) {
-    var acronym = document.getElementById("acronym");
     var publicPlace = document.getElementById("publicPlace");
     var numberPoint = document.getElementById("numberPoint");
     var neighborhood = document.getElementById("neighborhood");
@@ -71,7 +68,7 @@ function setInputValueForm($inputForm, $inputValidForm) {
     var inputForm = document.getElementById($inputForm);
     var inputValidForm = document.getElementById($inputValidForm);
 
-    var dataForm = acronym.value + " " + publicPlace.value + ", " + numberPoint.value + " " + neighborhood.value + ", " + city.value;
+    var dataForm = publicPlace.value + ", " + numberPoint.value + " " + neighborhood.value + ", " + city.value;
     const settings = {
         "async": true,
         "crossDomain": true,
@@ -87,14 +84,13 @@ function setInputValueForm($inputForm, $inputValidForm) {
         if (response) {
             lat = response.results[0].location.lat;
             lng = response.results[0].location.lng;
-            // console.log(response);
-            inputValidForm.value = publicPlace.value + " " + numberPoint.value + " " + neighborhood.value + ", " + city.value + "/" + lat + "/" + lng + "/" + acronym.value;
+            inputValidForm.value = publicPlace.value + " " + numberPoint.value + " " + neighborhood.value + ", " + city.value + "/" + lat + "/" + lng;
             inputForm.value = dataForm;
         } else {
             alert("Endereço informado não existe");
         }
     });
-    
+
     formValid();
 }
 
@@ -144,47 +140,82 @@ function loadOptionsAutoCompleteSelect() {
 /////////////////////////////////////////////////////////////////////////
 
 function formValid() {
-    var acronym = document.getElementById("acronym");
     var publicPlace = document.getElementById("publicPlace");
     var numberPoint = document.getElementById("numberPoint");
     var neighborhood = document.getElementById("neighborhood");
+    var resultAddress = document.getElementsByName("resultAddress")
+    console.log(resultAddress)
     var city = document.getElementById("city");
-    var addressString = acronym.value + " " + publicPlace.value + ", " + numberPoint.value + " - " + neighborhood.value + ", " + city.value;
-    
-    if (!acronym.checkValidity()
-        || !publicPlace.checkValidity()
-        || !numberPoint.checkValidity()
+    var addressString = publicPlace.value + ", " + numberPoint.value + " - " + neighborhood.value + ", " + city.value;
+
+    if (!publicPlace.checkValidity()
         || !neighborhood.checkValidity()
         || !city.checkValidity()
-        || !confirmeEqualsAdress.checkValidity()
+        || !resultAddress.checked
     ) {
-        document.getElementById("acronymMessageError").innerHTML = acronym.validationMessage;
         document.getElementById("publicPlaceMessageError").innerHTML = publicPlace.validationMessage;
-        document.getElementById("numberPointMessageError").innerHTML = numberPoint.validationMessage;
         document.getElementById("neighborhoodMessageError").innerHTML = neighborhood.validationMessage;
         document.getElementById("cityMessageError").innerHTML = city.validationMessage;
-        document.getElementById("confirmeEqualsAdressMessageError").innerHTML = confirmeEqualsAdress.validationMessage;
-    } else {
-        var messageConfirmeAddress = confirm(`Confirme se o endereço está correto.\n`+addressString+``);
-        if(messageConfirmeAddress){
-            dismissModal();
-        }
-    }
+        document.getElementById("inputAddressMessageError").innerHTML = `Marque o edereço correto.`;
+    } 
+    // else {
+    //     var messageConfirmeAddress = confirm(`Confirme se o endereço está correto.\n` + addressString + ``);
+    //     if (messageConfirmeAddress) {
+    //         dismissModal();
+    //     }
+    // }
 }
 
 function verifyAddress() {
-    var acronym = document.getElementById("acronym");
     var publicPlace = document.getElementById("publicPlace");
-    var numberPoint = document.getElementById("numberPoint");
     var neighborhood = document.getElementById("neighborhood");
     var city = document.getElementById("city");
-    var mapValidate = document.getElementById("mapValidate");
-    var addressMapValidate = acronym.value + " " + publicPlace.value + ", " + numberPoint.value + " - " + neighborhood.value + ", " + city.value;
-    if (addressMapValidate == " ,  - , ") {
-        mapValidate.innerHTML = "";
-        mapValidate.innerHTML = `<div class="ls-alert-danger"><h4><strong>Vish!</strong> Formulário vazio! Por favor preencha todos os campos.</h4></div>`;
-    } else {
-            mapValidate.innerHTML = "";
-            mapValidate.innerHTML = `<iframe style="margin-top: 20px; margin-bottom:20px" width="100%" scrolling="no" height="330" frameborder="0" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?saddr=` + addressMapValidate + `&daddr=&output=embed"></iframe>`
-    }
+    var list = document.getElementById("list-address")
+
+    list.innerHTML = '';
+    (async () => {
+        const where = encodeURIComponent(JSON.stringify({
+            "CEP": {
+                "$exists": true
+            },
+            "logradouro": {
+                "$regex": `${publicPlace.value}`
+            },
+            "bairro": {
+                "$regex": `${neighborhood.value}`
+            },
+            "cidade": {
+                "$regex": `${city.value}`
+            },
+            "estado": {
+                "$regex": `CE`
+            }
+        }));
+
+        const response = await fetch(
+            `https://parseapi.back4app.com/classes/Cepcorreios_CEP?order=logradouro,numero&where=${where}`,
+            {
+                headers: {
+                    'X-Parse-Application-Id': 'HOxsKJKX4pMCPj8mlONa3ZlEO3nascw1hpiev4Ob', // This is your app's application id
+                    'X-Parse-REST-API-Key': '5EruqeHQgoUkhAMp4iSBD3Q6Z5h9lDo40L8Brb2H', // This is your app's REST API key
+                }
+            }
+        );
+        const data = await response.json(); // Here you have the data that you need
+        console.log(JSON.stringify(data, null, 2));
+
+        if(data.results.length > 0){
+            list.setAttribute('class', 'ls-alert-info')
+            data.results.forEach(address => {
+                var stringAddress = `${address.logradouro} - ${address.bairro}, ${address.cidade} - ${address.estado}, ${address.CEP}`
+                list.innerHTML += '<input type="radio" name="resultAddress" id="' + stringAddress + '" name="addr" value="' + stringAddress + '"><label for="' + stringAddress + '">' + stringAddress + '</label><br>'
+            })
+        } else {
+            list.setAttribute('class', 'ls-alert-danger')
+            list.innerHTML = `<label>Endereço NÃO encontrado! Digite um endereço válido.</label>`
+        }
+
+
+
+    })();
 }

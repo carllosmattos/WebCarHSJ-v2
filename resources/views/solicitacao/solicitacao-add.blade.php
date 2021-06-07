@@ -195,12 +195,7 @@
         </div>
         <div class="ls-modal-body" style="height: 250px;">
             <div class="col-md-12">
-                <label class="col-md-3">
-                    <b>Nome do local</b>
-                    <input id="acronym" class="col-md-12" type="text" placeholder="Hospital São José ou HSJ" required>
-                    <div id="acronymMessageError" class="ls-alert-danger"></div>
-                </label>
-                <div class="col-md-7">
+                <div class="col-md-10">
                     <b>Endereço</b>
                     <input id="publicPlace" class="col-md-12" type="text" placeholder="R. Nestor Barbosa" required>
                     <div id="publicPlaceMessageError" class="ls-alert-danger"></div>
@@ -222,24 +217,12 @@
                     <input id="city" class="col-md-12" type="text" placeholder="Fortaleza" required>
                     <div id="cityMessageError" class="ls-alert-danger"></div>
                 </div>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <div class="" id="list-address"></div>
+                    <div id="inputAddressMessageError" class="ls-alert-danger"></div>
+                </div>
                 <div class="col-md-12">
                     <button style="margin: 10px 0;" onclick="verifyAddress()" class="ls-btn-primary">Verifique o endereço</button>
-                </div>
-                <div>
-                    <div class="col-md-12" id="mapValidate">
-                        <iframe style="margin-top: 10px;" width="100%" scrolling="no"  height="330px" frameborder="0" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?saddr=HSJ&daddr=&output=embed">
-                        </iframe>
-                    </div>
-                    <div class="col md-12">
-                        <div class="col-md-12">
-                            <b>O endereço que você digitou é o mesmo mostrado no mapa?</b>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="checkbox" id="confirmeEqualsAdress" name="confirmeEqualsAdress" required>
-                            <label><b>SIM</b></label>
-                            <div id="confirmeEqualsAdressMessageError" class="ls-alert-danger"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="ls-modal-footer">
