@@ -28,7 +28,7 @@ MAIL_DRIVER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
 MAIL_USERNAME=developmentsoftware.hsj@gmail.com
-MAIL_PASSWORD=hsj@2328
+MAIL_PASSWORD=deVhSj74$*
 MAIL_ENCRYPTION=tls
 
 AWS_ACCESS_KEY_ID=

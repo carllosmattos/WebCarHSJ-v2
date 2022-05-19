@@ -20,13 +20,16 @@ Route::get('/request-vehicle-pdf/{id}', 'PdfController@gerarPdf');
 Route::get('/authorization-pdf/{id}', 'PdfController@gerarPdf1');
 Route::get('/informacao/add', 'InformacaoController@get_add_informacao')->name('informacao.add'); // Rota da view
 
+// TUTORIAL
 Route::get('/informacao/tutorial', 'InformacaoController@get_tutorial_informacao')->name('informacao.tutorial');
-
+// TUTORIAIS
 Route::get('/informacao/cad', 'InformacaoController@get_tutorial_cad')->name('informacao.cad');
 Route::get('/informacao/access', 'InformacaoController@get_tutorial_access')->name('informacao.access');
 Route::get('/informacao/resetpassword', 'InformacaoController@get_tutorial_resetpassword')->name('informacao.resetpassword');
 Route::get('/informacao/vehiclerequest', 'InformacaoController@get_tutorial_vehiclerequest')->name('informacao.vehiclerequest');
 Route::get('/informacao/verifyrequest', 'InformacaoController@get_tutorial_verifyrequest')->name('informacao.verifyrequest');
+
+Route::get('/informacao/newsolicity', 'InformacaoController@get_tutorial_newsolicity')->name('informacao.newsolicity');
 
 // ROTAS PARA DESLOGAR E ENVIAR PARA VIEW DE LOGIN
 Route::get('/logout', 'Auth\LoginController@logout');

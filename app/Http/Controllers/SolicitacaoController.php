@@ -32,7 +32,10 @@ class SolicitacaoController extends Controller
                 DB::raw('lat as lat'),
                 DB::raw('lng as lng'),
             )->get();
-        return view('solicitacao/solicitacao-add')
+
+        $allAdress = DB::table('adress')->orderBy('acronym', 'ASC')->get();
+
+        return view('solicitacao/solicitacao-add', compact('allAdress'))
             ->with('adress', json_encode($adress))
             ->with('usuarios', json_encode($usuarios));
     }
@@ -44,16 +47,12 @@ class SolicitacaoController extends Controller
         $authUserID = Auth::user()->id;
         $role_id = DB::table('role_user')->where('user_id', $authUserID)->get('role_id');
         $role = DB::table('roles')->where('id', $role_id[0]->role_id)->get();
-        $roleUserRequest = $role[0]->name;
-        // dd($roleUserRequest);
-        
+
         $arrayForm = count($field['solicitante']);
         $solicitante = $field['solicitante'];
         $setorsolicitante = $field['setorsolicitante'];
         $origem = $field['origem'];
         $destino = $field['destino'];
-        $origemValid = $field['origemValid'];
-        $destinoValid = $field['destinoValid'];
         $unidade = $field['unidade'];
         $leito = $field['leito'];
         $sltmotivo = $field['sltmotivo'];
@@ -76,42 +75,6 @@ class SolicitacaoController extends Controller
             $vehiclerequests[$i]->setorsolicitante = $setorsolicitante[$i];
             $vehiclerequests[$i]->origem = $origem[$i];
             $vehiclerequests[$i]->destino = $destino[$i];
-
-            // Cria um endereço se já não existir
-            if($roleUserRequest !== 'PAD'){
-                if ($origemValid[$i] != null) {
-                    $newOrigemValid[$i] = explode("/", $origemValid[$i]);
-                    $verifyOriginExistsRegister[$i] = DB::table('adress')->where('lat', $newOrigemValid[$i][1])->where('lng', $newOrigemValid[$i][2])->count();
-                    if ($verifyOriginExistsRegister[$i] < 1) {
-                        DB::table('adress')
-                            ->insert(
-                                [
-                                    'slug_adress' =>  $newOrigemValid[$i][0],
-                                    'acronym' => $newOrigemValid[$i][3],
-                                    'lat' => $newOrigemValid[$i][1],
-                                    'lng' => $newOrigemValid[$i][2],
-                                ]
-                            );
-                    }
-                }
-    
-                if ($destinoValid[$i] != null) {
-                    $newDestinoValid[$i] = explode("/", $destinoValid[$i]);
-                    $verifyDestinoExistsRegister[$i] = DB::table('adress')->where('lat', $newDestinoValid[$i][1])->where('lng', $newDestinoValid[$i][2])->count();
-                    if ($verifyDestinoExistsRegister[$i] < 1) {
-                        DB::table('adress')
-                            ->insert(
-                                [
-                                    'slug_adress' =>  $newDestinoValid[$i][0],
-                                    'acronym' => $newDestinoValid[$i][3],
-                                    'lat' => $newDestinoValid[$i][1],
-                                    'lng' => $newDestinoValid[$i][2],
-                                ]
-                            );
-                    }
-                }
-            }
-            ////////////////////////////////////////////////////
 
             // Identifica a finalidade para salvar
             if (!empty($unidade[$i])) {
@@ -207,16 +170,16 @@ class SolicitacaoController extends Controller
             $vehiclerequests = false;
         }
 
-        if($role_id[0]->role_id == 1 || $role_id[0]->role_id == 2){
+        if ($role_id[0]->role_id == 1 || $role_id[0]->role_id == 2) {
             return view('solicitacao/solicitacao-list', compact('vehiclerequests'))
-            ->with('requests', json_encode($requestsAll))
-            ->with('sectors', json_encode($sectors))
-            ->with('users', json_encode($users));
+                ->with('requests', json_encode($requestsAll))
+                ->with('sectors', json_encode($sectors))
+                ->with('users', json_encode($users));
         } else {
             return view('solicitacao/solicitacao-list', compact('vehiclerequests'))
-            ->with('requests', json_encode($requests))
-            ->with('sectors', json_encode($sectors))
-            ->with('users', json_encode($users));
+                ->with('requests', json_encode($requests))
+                ->with('sectors', json_encode($sectors))
+                ->with('users', json_encode($users));
         }
     }
 
@@ -224,7 +187,7 @@ class SolicitacaoController extends Controller
     public function get_edit_solicitacao($id)
     {
         // Retorna os endereços
-        $adress = DB::table('adress')
+        $allAdress = DB::table('adress')
             ->select(
                 DB::raw('id as id'),
                 DB::raw('slug_adress as slug_adress'),
@@ -233,58 +196,38 @@ class SolicitacaoController extends Controller
                 DB::raw('lng as lng'),
             )->get();
 
+        $addressOrigemRequested = DB::table('vehiclerequests')->where('id', $id)->get('origem');
+        $addressDestinoRequested = DB::table('vehiclerequests')->where('id', $id)->get('destino');
+
+        if ($allAdress ->contains("slug_adress", $addressOrigemRequested[0]->origem)) {
+            $addressOrigem = false;
+        } else {
+            $addressOrigem = $addressOrigemRequested[0]->origem;
+        }
+
+        
+        if ($allAdress ->contains("slug_adress", $addressDestinoRequested[0]->destino)) {
+            $addressDestino = false;
+        } else {
+            $addressDestino = $addressDestinoRequested[0]->destino;
+        }
+
         $vehiclerequest = Solicitacao::find($id);
 
-        return view('solicitacao/solicitacao-edit', compact('vehiclerequest'))->with('adress', json_encode($adress));
+        return view(
+            'solicitacao/solicitacao-edit',
+            compact('vehiclerequest', 'allAdress', 'addressOrigem', 'addressDestino')
+        );
     }
 
     // Função para editar informações
     public function post_edit_solicitacao(Request $info, $id)
     {
-
-        $origemValid = $info['origemValid'];
-        // dd($origemValid);
-        $destinoValid = $info['destinoValid'];
-
         $vehiclerequest = Solicitacao::find($id);
         $vehiclerequest->solicitante = $info["solicitante"];
         $vehiclerequest->setorsolicitante = $info["setorsolicitante"];
         $vehiclerequest->origem = $info["origem"];
         $vehiclerequest->destino = $info["destino"];
-
-        // Cria um endereço se já não existir
-        if (!empty($origemValid[0])) {
-            $newOrigemValid = explode("/", $origemValid[0]);
-            $verifyOriginExistsRegister = DB::table('adress')->where('lat', $newOrigemValid[1])->where('lng', $newOrigemValid[2])->count();
-            if ($verifyOriginExistsRegister < 1) {
-                DB::table('adress')
-                    ->insert(
-                        [
-                            'slug_adress' =>  $newOrigemValid[0],
-                            'acronym' => $newOrigemValid[3],
-                            'lat' => $newOrigemValid[1],
-                            'lng' => $newOrigemValid[2],
-                        ]
-                    );
-            }
-        }
-
-        if (!empty($destinoValid[0])) {
-            $newDestinoValid = explode("/", $destinoValid[0]);
-            $verifyDestinoExistsRegister = DB::table('adress')->where('lat', $newDestinoValid[1])->where('lng', $newDestinoValid[2])->count();
-            if ($verifyDestinoExistsRegister < 1) {
-                DB::table('adress')
-                    ->insert(
-                        [
-                            'slug_adress' =>  $newDestinoValid[0],
-                            'acronym' => $newDestinoValid[3],
-                            'lat' => $newDestinoValid[1],
-                            'lng' => $newDestinoValid[2],
-                        ]
-                    );
-            }
-        }
-        ////////////////////////////////////////////////////
 
         $vehiclerequest->unidade = $info["unidade"];
         $vehiclerequest->leito = $info["leito"];

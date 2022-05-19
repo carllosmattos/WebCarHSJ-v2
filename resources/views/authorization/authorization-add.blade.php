@@ -51,6 +51,7 @@
           <tr>
             <th class="a-center" width="60">Cod</th>
             <th class="a-center">Solicitante - Setor</th>
+            <th class="a-center">Hora Solicitada</th>
             <th class="a-center">Origem - Destino</th>
             <th class="a-center" width="25">Saída</th>
             <th class="a-center" width="25">Inserir</th>
@@ -90,6 +91,13 @@
               @endif
               @endforeach
             </td>
+
+            {{-- HORA DA SOLICITAÇÃO --}}
+            <td>
+              <?php echo date("H:i:s", strtotime("$vehiclerequest->created_at UTC"))?>
+            </td>
+            {{-- /HORA DA SOLICITAÇÃO --}}
+
             <td>
               <?php
               $origem = substr($vehiclerequest->origem, 0, strrpos(substr($vehiclerequest->origem, 0, 20), ' ')) . '...';

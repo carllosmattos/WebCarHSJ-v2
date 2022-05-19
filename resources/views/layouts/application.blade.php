@@ -82,12 +82,36 @@
                                 <small
                                     style="border: 1px solid red; padding: 0px 4px; border-radius: 50px; background-color: red; color:#fff; position: relative; left: 50px;">
                                     <?php echo DB::table('vehiclerequests')
-                                    ->where('statussolicitacao', 'PENDENTE')
-                                    ->count(); ?>
-                                </small></a>
+                                        ->where('statussolicitacao', 'PENDENTE')
+                                        ->count(); ?>
+                                </small>
+                                &nbsp;
+                                <small 
+                                    style="border: 1px solid green; padding: 0px 4px; border-radius: 50px; background-color: green; color:#fff; position: relative; left: 50px;">
+                                    <?php echo DB::table('vehiclerequests')
+                                        ->where('statussolicitacao', 'AUTORIZADA')
+                                        ->count(); ?>
+                                </small>
+                            </a>
                             <ul>
-                                <li><a href="/authorization-add">Definir Roteiros</a></li>
-                                <li><a href="{{ route('authorizations') }}">Listar Solicitações <br>e Roteios</a></li>
+                                <li>
+                                    <a href="/authorization-add">Definir Roteiros
+                                        <small
+                                            style="border: 1px solid red; padding: 0px 4px; border-radius: 50px; background-color: red; color:#fff; position: relative; left: 50px;">
+                                            <?php echo DB::table('vehiclerequests')
+                                                ->where('statussolicitacao', 'PENDENTE')
+                                                ->count(); ?>
+                                        </small>
+                                    </a>
+                                </li>
+                                <li><a href="{{ route('authorizations') }}">Listar Solicitações <br>e Roteios
+                                    <small
+                                    style="border: 1px solid green; padding: 0px 4px; border-radius: 50px; background-color: green; color:#fff; position: relative; left: 50px;">
+                                    <?php echo DB::table('vehiclerequests')
+                                        ->where('statussolicitacao', 'AUTORIZADA')
+                                        ->count(); ?>
+                                </small>
+                                </a></li>
                             </ul>
                         </li>
                     @endcan
@@ -156,7 +180,7 @@
                     <!-- /SOBRE -->
 
                     <!-- AJUDA  -->
-                    <li><a class="ls-ico-question" href="/informacao/tutorial">Ajuda</a></li>
+                    <li><a class="ls-ico-question" href="/informacao/tutorial">Tutorial do Sistema</a></li>
                     <!-- /AJUDA  -->
                 </ul>
             </nav>
@@ -186,7 +210,9 @@
     <script type="text/javascript"
         src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.js">
     </script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+        integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
+        crossorigin="anonymous"></script> -->
 </body>
 
 </html>
