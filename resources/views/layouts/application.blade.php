@@ -86,7 +86,7 @@
                                         ->count(); ?>
                                 </small>
                                 &nbsp;
-                                <small 
+                                <small
                                     style="border: 1px solid green; padding: 0px 4px; border-radius: 50px; background-color: green; color:#fff; position: relative; left: 50px;">
                                     <?php echo DB::table('vehiclerequests')
                                         ->where('statussolicitacao', 'AUTORIZADA')
@@ -105,13 +105,13 @@
                                     </a>
                                 </li>
                                 <li><a href="{{ route('authorizations') }}">Listar Solicitações <br>e Roteios
-                                    <small
-                                    style="border: 1px solid green; padding: 0px 4px; border-radius: 50px; background-color: green; color:#fff; position: relative; left: 50px;">
-                                    <?php echo DB::table('vehiclerequests')
-                                        ->where('statussolicitacao', 'AUTORIZADA')
-                                        ->count(); ?>
-                                </small>
-                                </a></li>
+                                        <small
+                                            style="border: 1px solid green; padding: 0px 4px; border-radius: 50px; background-color: green; color:#fff; position: relative; left: 50px;">
+                                            <?php echo DB::table('vehiclerequests')
+                                                ->where('statussolicitacao', 'AUTORIZADA')
+                                                ->count(); ?>
+                                        </small>
+                                    </a></li>
                             </ul>
                         </li>
                     @endcan
@@ -199,8 +199,7 @@
 
     <!-- We recommended use jQuery 1.10 or up -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://assets.locaweb.com.br/locastyle/3.10.0/javascripts/locastyle.js" type="text/javascript">
-    </script>
+    <script src="http://assets.locaweb.com.br/locastyle/3.10.0/javascripts/locastyle.js" type="text/javascript"></script>
 
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.css" />
@@ -214,5 +213,11 @@
         integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
         crossorigin="anonymous"></script> -->
 </body>
+<footer>
+    <div class="card-footer text-muted d-flex justify-content-around" style="
+        background-color: white; border-top-color: rgba(0,0,0, 0.1); margin-left:250px;">
+        &copy; 2020 - Todos os direitos reservados
+    </div>
+</footer>
 
 </html>

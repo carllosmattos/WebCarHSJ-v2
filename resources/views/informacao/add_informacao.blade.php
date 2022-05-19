@@ -77,13 +77,7 @@
                     <br>
                     <p style="font-size: 18px;">Com a necessidade de atualizar seus processos internos, o Hospital São José
                     </p>
-                    <p style="font-size: 18px;">seguiu adiante com recursos próprios o desenvolvimento do sistema</p>
-                    <p style="font-size: 18px;">Consulte a documentação do sistema clicando no link a seguir.</p>
-
-                    <a id="User" href="https://drive.google.com/file/d/13ImQdcuPx_ZlZth_a6-Q0lmwRCavGp2_/view?usp=sharing"
-                        target="_blank">
-                        <font style="font-size: 18px;">Documentação</font>
-                    </a>
+                    <p style="font-size: 18px;">seguiu adiante com recursos próprios o desenvolvimento do sistema.</p>
                     </p>
                     <br>
                     <h4 class="ls-title"><strong>Versão Desenvolvida Por:</strong></h4>
@@ -132,7 +126,4 @@
         <br>
         <br>
     </fieldset>
-
-
-    <footer class="footer">© 2020 - Todos os direitos reservados</footer>
 @stop

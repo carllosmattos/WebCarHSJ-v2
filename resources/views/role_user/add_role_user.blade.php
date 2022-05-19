@@ -51,14 +51,12 @@
 
 
             </fieldset>
-
-            <div class="ls-actions-btn">
+            <div class="ls-actions-btn" style="border-top-color: rgba(255,255,255);">
                 <input type="submit" value="Cadastrar" class="ls-btn-primary" title="Cadastrar" style="font-weight: bold;">
-                <input class="ls-btn-primary-danger" type="reset" value="Limpar" style="font-weight: bold;">
+                <input type="reset" value="Limpar" class="ls-btn-primary-danger" sstyle="font-weight: bold;">
             </div>
         </form>
 
     </div>
-
 
 @stop

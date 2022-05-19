@@ -127,10 +127,4 @@
         <!-- /SOLICITAÇÃO -->
 
     </fieldset>
-
-    <br><br><br>
-
-    <footer class="footer">© 2020 - Todos os direitos reservados</footer>
-
-    <br>
 @stop

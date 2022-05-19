@@ -41,10 +41,4 @@
         <!-- /RESETAR SENHA -->
 
     </fieldset>
-
-    <br><br><br><br><br><br>
-
-    <footer class="footer">© 2020 - Todos os direitos reservados</footer>
-
-    <br>
 @stop
