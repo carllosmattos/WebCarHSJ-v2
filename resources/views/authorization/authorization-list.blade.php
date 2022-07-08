@@ -36,8 +36,8 @@
 
     <div class="col-md-12">
         <b class="ls-title-5"><span style="color: green;"><?php echo DB::table('vehiclerequests')
-    ->where('statussolicitacao', 'AUTORIZADA')
-    ->count(); ?></span> - Solicitações autorizadas</b>
+            ->where('statussolicitacao', 'AUTORIZADA')
+            ->count(); ?></span> - Solicitações autorizadas</b>
         <hr>
         <!-- Tabela direita com lista de todos os roteiros -->
         <table class="table table-hover">

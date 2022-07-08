@@ -4,7 +4,7 @@
 <h1 class="ls-title-intro ls-ico-code">Solicitar Veiculo</h1>
 
 <form method="POST" action="{{ route('solicitacao.postEdit', $vehiclerequest->id) }}" class="ls-form row" id="add">
-	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 	<fieldset id="field01">
 		<div class="ls-box">
 			<div class="col-md-12">
@@ -71,7 +71,10 @@
 								<select id="setorsolicitante[0]" name="setorsolicitante" class="ls-select form-control" required>
 									@inject('sectors', '\App\Sector')
 									@foreach($sectors->getSectors() as $sectors)
-									<option value="{{$sectors->cc}}" @if($vehiclerequest->setorsolicitante == $sectors->cc) selected @else @endif class=" form-control">{{$sectors->cc}} - {{$sectors->sector}}</option>
+									<option value="{{$sectors->cc}}"
+										@if($vehiclerequest->setorsolicitante == $sectors->cc) selected
+										@else @endif class=" form-control">
+										{{$sectors->cc}} - {{$sectors->sector}}</option>
 									@endforeach
 								</select>
 							</div>

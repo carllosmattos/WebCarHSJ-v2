@@ -199,14 +199,14 @@ class SolicitacaoController extends Controller
         $addressOrigemRequested = DB::table('vehiclerequests')->where('id', $id)->get('origem');
         $addressDestinoRequested = DB::table('vehiclerequests')->where('id', $id)->get('destino');
 
-        if ($allAdress ->contains("slug_adress", $addressOrigemRequested[0]->origem)) {
+        if ($allAdress->contains("slug_adress", $addressOrigemRequested[0]->origem)) {
             $addressOrigem = false;
         } else {
             $addressOrigem = $addressOrigemRequested[0]->origem;
         }
 
-        
-        if ($allAdress ->contains("slug_adress", $addressDestinoRequested[0]->destino)) {
+
+        if ($allAdress->contains("slug_adress", $addressDestinoRequested[0]->destino)) {
             $addressDestino = false;
         } else {
             $addressDestino = $addressDestinoRequested[0]->destino;
